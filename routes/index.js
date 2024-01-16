@@ -1,11 +1,49 @@
 var express = require('express');
+var express = require('express');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+var crypto = require('crypto');
 var db = require('../db');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Ass' });
+passport.use(new LocalStrategy(function verify(username, password, cb) {
+  db.get('SELECT * FROM users WHERE username = ?', [ username ], function(err, row) {
+    if (err) { return cb(err); }
+    if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+
+    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+      if (err) { return cb(err); }
+      if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
+        return cb(null, false, { message: 'Incorrect username or password.' });
+      }
+      return cb(null, row);
+    });
+  });
+}));
+// persist user information in the login session
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, username: user.username });
+  });
 });
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
+
+// Login route
+router.get('/', function(req, res, next) {
+  if (!req.user) {res.render('login', { title: 'Ass'});}
+
+  res.render('success', { user: req.user });
+});
+
+router.post('/auth/login', passport.authenticate('local', {
+  successRedirect: '/success',
+  failureRedirect: '/login'
+}));
 
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Ass' });
