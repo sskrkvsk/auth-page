@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>WELL CUM to <%= title %></h1>
+      <form action="/auth/signup" method="post">
+        <div>
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            autofocus
+          />
+        </div>
+        <div>
+          <label for="current-password">Password</label>
+          <input
+            type="text"
+            id="current-password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <button type="submit">Sign up</button>
+      </form>
+      <p class="help">Already registered? <a href="/">Log in</a></p>
+    </main>
+  </body>
+</html>
