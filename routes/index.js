@@ -1,84 +1,14 @@
 var express = require('express');
-var express = require('express');
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var crypto = require('crypto');
-var db = require('../db');
 var router = express.Router();
+// var db = require('../db');
 
-passport.use(new LocalStrategy(function verify(username, password, cb) {
-  db.get('SELECT * FROM users WHERE username = ?', [ username ], function(err, row) {
-    if (err) { return cb(err); }
-    if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
 
-    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-      if (err) { return cb(err); }
-      if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-        return cb(null, false, { message: 'Incorrect username or password.' });
-      }
-      return cb(null, row);
-    });
-  });
-}));
-// persist user information in the login session
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
-
-// Login route
+// Home route
 router.get('/', function(req, res, next) {
-  if (!req.user) {res.render('login', { title: 'Ass'});}},
+  
+  if (!req.user) {console.log("no user", req.user); res.render('login', { title: 'Ass'});}},
   function(req, res, next) {
-  res.render('success', { user: req.user });} );
-
-router.post('/auth/login', passport.authenticate('local', {
-  successRedirect: '/success',
-  failureRedirect: '/'
-}));
-
-router.get('/signup', function(req, res, next) {
-  res.render('signup', { title: 'Ass' });
-});
-
-router.post('/auth/signup', function(req, res, next) {
-  var salt = crypto.randomBytes(16);
-  crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-    if (err) { return next(err); }
-    db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
-      req.body.username,
-      hashedPassword,
-      salt
-    ], function(err) {
-      if (err) { return next(err); }
-      var user = {
-        id: this.lastID,
-        username: req.body.username
-      };
-      req.login(user, function(err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-      });
-    });
-  });
-});
-
-router.get('/success', function(req, res, next) {
-  res.render('success', { title: 'Ass' });
-});
-
-router.post('/logout', function(req, res, next) {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
-});
+    console.log("success", req.user);
+  res.render('home', { user: req.user });} );
 
 module.exports = router;
