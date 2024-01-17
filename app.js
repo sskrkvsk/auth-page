@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var localRouter = require('./routes/local');
 var googleRouter = require('./routes/google');
 var facebookRouter = require('./routes/facebook');
+var githubRouter = require('./routes/github');
 
 var app = express();
 app.locals.pluralize = require('pluralize');
@@ -40,6 +41,7 @@ app.use('/', indexRouter);
 app.use('/', localRouter);
 app.use('/', googleRouter);
 app.use('/', facebookRouter);
+app.use('/', githubRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
