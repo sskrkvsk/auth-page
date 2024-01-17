@@ -12,6 +12,7 @@ var SQLiteStore = require('connect-sqlite3')(session);
 
 var indexRouter = require('./routes/index');
 var localRouter = require('./routes/local');
+var googleRouter = require('./routes/google');
 
 var app = express();
 app.locals.pluralize = require('pluralize');
@@ -36,6 +37,7 @@ app.use(passport.authenticate('session'));
 
 app.use('/', indexRouter);
 app.use('/', localRouter);
+app.use('/', googleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
