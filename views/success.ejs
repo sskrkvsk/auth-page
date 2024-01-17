@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><%= title %></title>
+    <title>Success Page</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <H1>You have successfully loged in!</H1>
+    <form action="/logout" method="post">
+      <button class="logout" type="submit">Sign out</button>
+    </form>
   </body>
 </html>

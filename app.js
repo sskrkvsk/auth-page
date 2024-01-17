@@ -25,10 +25,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // add session support to the app and then authenticate the session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'keyboard cat', // .env
   resave: false,
   saveUninitialized: false,
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' }),
+  cookie: { maxAge:  1000 * 60 * 60 * 24}
 }));
 app.use(passport.authenticate('session'));
 
@@ -38,7 +39,7 @@ app.use('/', indexRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+ 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

@@ -36,13 +36,14 @@ passport.deserializeUser(function(user, cb) {
 // Login route
 router.get('/', function(req, res, next) {
   if (!req.user) {res.render('login', { title: 'Ass'});}
+  console.log(req.session);
 
   res.render('success', { user: req.user });
 });
 
 router.post('/auth/login', passport.authenticate('local', {
   successRedirect: '/success',
-  failureRedirect: '/login'
+  failureRedirect: '/'
 }));
 
 router.get('/signup', function(req, res, next) {
@@ -51,6 +52,13 @@ router.get('/signup', function(req, res, next) {
 
 router.get('/success', function(req, res, next) {
   res.render('success', { title: 'Ass' });
+});
+
+router.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
