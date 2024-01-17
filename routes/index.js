@@ -35,11 +35,9 @@ passport.deserializeUser(function(user, cb) {
 
 // Login route
 router.get('/', function(req, res, next) {
-  if (!req.user) {res.render('login', { title: 'Ass'});}
-  console.log(req.session);
-
-  res.render('success', { user: req.user });
-});
+  if (!req.user) {res.render('login', { title: 'Ass'});}},
+  function(req, res, next) {
+  res.render('success', { user: req.user });} );
 
 router.post('/auth/login', passport.authenticate('local', {
   successRedirect: '/success',
@@ -48,6 +46,28 @@ router.post('/auth/login', passport.authenticate('local', {
 
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Ass' });
+});
+
+router.post('/auth/signup', function(req, res, next) {
+  var salt = crypto.randomBytes(16);
+  crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+    if (err) { return next(err); }
+    db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
+      req.body.username,
+      hashedPassword,
+      salt
+    ], function(err) {
+      if (err) { return next(err); }
+      var user = {
+        id: this.lastID,
+        username: req.body.username
+      };
+      req.login(user, function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+    });
+  });
 });
 
 router.get('/success', function(req, res, next) {
