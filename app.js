@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // add session support to the app and then authenticate the session
 app.use(session({
-  secret: 'keyboard cat', // .env
+  secret: process.env['SESSION_SECRET'], // .env
   resave: false,
   saveUninitialized: false,
   store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' }),
