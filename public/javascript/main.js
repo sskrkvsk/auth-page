@@ -30,3 +30,14 @@ eye.addEventListener('click', ()=> {
     eye.textContent = 'visibility';
   }
 })
+
+const moon = document.getElementById("spin-toggle");
+moon.addEventListener('click', () => {
+  moon.classList.toggle('spin');
+});
+
+const page = document.querySelector("h1").textContent;
+if (page === 'Sign in to continue') {
+  document.getElementById('submit-btn').textContent = 'Sign in'
+}
+

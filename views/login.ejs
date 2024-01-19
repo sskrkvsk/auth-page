@@ -1,88 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login page</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-    />
-  </head>
-  <body>
+<%- include('./templates/header.ejs') %>
     <main>
       <h1>Log in to continue</h1>
       <form class="local-form" action="/auth/login" method="post">
-        <div class="input-container">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your Email"
-            required
-            autofocus
-          />
-          <input
-            type="password"
-            id="current-password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <span id="eye" class="material-symbols-outlined"> visibility </span>
-        </div>
-        <button id="submit-btn" type="submit">Continue</button>
+        <%- include('./templates/local-form.ejs') %>
       </form>
       <p class="help">Don't have an account? <a href="/signup">Sign up</a></p>
-      <section class="socials">
-        <a class="btn google" href="/login/federated/google"
-          >Sign in with Google</a
-        >
-        <a class="btn facebook" href="/login/federated/facebook"
-          >Sign in with Facebook</a
-        >
-        <a class="btn github" href="/login/federated/github"
-          >Sign in with GitHub</a
-        >
-      </section>
+      <%- include('./templates/socials.ejs') %>
     </main>
-    <section class="animations">
-      <div class="system">
-        <div id="bg-toggle" class="moon"></div>
-      </div>
-
-      <div id="f-star1" class="falling-star"></div>
-      <div id="f-star2" class="falling-star"></div>
-      <div class="sky">
-        <div id="1" class="star"></div>
-        <div id="2" class="star"></div>
-        <div id="3" class="star"></div>
-        <div id="4" class="star"></div>
-        <div id="5" class="star"></div>
-        <div id="6" class="star"></div>
-        <div id="7" class="star"></div>
-        <div id="8" class="star"></div>
-        <div id="9" class="star"></div>
-        <div id="10" class="star"></div>
-        <div id="11" class="star"></div>
-        <div id="12" class="star"></div>
-        <div id="13" class="star"></div>
-        <div id="14" class="star"></div>
-        <div id="15" class="star"></div>
-        <div id="16" class="star"></div>
-        <div id="17" class="star"></div>
-        <div id="18" class="star"></div>
-        <div id="19" class="star"></div>
-        <div id="20" class="star"></div>
-      </div>
-    </section>
+    <%- include('./templates/animations.ejs') %>
     <script src="./javascript/main.js"></script>
   </body>
 </html>

@@ -120,6 +120,7 @@ input {
   text-align: left;
   color: #838383;
   padding: 10px 4px;
+  margin-bottom: 20px;
 }
 
 /* Socials */
@@ -131,15 +132,32 @@ input {
 }
 
 .btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   width: 300px;
   height: 50px;
   background-color: transparent;
-  color: #fff;
+  color: #e2e2e2;
   font-size: 15px;
   padding: 0 15px;
   border-radius: 10px;
   border: solid 0.5px rgb(119, 119, 119);
   transition: ease 1s;
+}
+
+.btn:hover {
+  text-decoration: none;
+  border: solid 1px #fff;
+  color: #fff;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.icon {
+  width: 35px;
 }
 
  /* ANIMATIONS */
@@ -234,7 +252,7 @@ input {
 
 @keyframes rotation {
   to {
-    transform: rotate3d(0, 1, 0, 1turn);
+    transform: rotate3d(0, 1, 0, 3turn);
   }
 }
 
@@ -246,9 +264,10 @@ input {
   height: 100px;
   border-radius: 50%;
   box-shadow: 0 0 10px 2px white;
+}
 
-  /* animation: rotation 4s linear infinite; */
-  /* perspective: 500px; */
+.spin {
+  animation: rotation 1s linear;
 }
 
 
