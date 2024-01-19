@@ -1,24 +1,23 @@
+console.log('Starting the application...');
 require('dotenv').config();
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var passport = require('passport');
-var session = require('express-session');
 
-var SQLiteStore = require('connect-sqlite3')(session);
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 
-var indexRouter = require('./routes/index');
-var localRouter = require('./routes/local');
-var googleRouter = require('./routes/google');
-var facebookRouter = require('./routes/facebook');
-var githubRouter = require('./routes/github');
+const indexRouter = require('./routes/index');
+const localRouter = require('./routes/local');
+const googleRouter = require('./routes/google');
+const facebookRouter = require('./routes/facebook');
+const githubRouter = require('./routes/github');
 
-var app = express();
-app.locals.pluralize = require('pluralize');
-
+const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -26,16 +25,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-// add session support to the app and then authenticate the session
 app.use(session({
-  secret: process.env['SESSION_SECRET'], // .env
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' }),
-  cookie: { maxAge:  1000 * 60 * 60 * 24}
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
-app.use(passport.authenticate('session'));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', localRouter);
@@ -47,14 +46,11 @@ app.use('/', githubRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
- 
+
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

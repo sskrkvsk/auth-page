@@ -46,9 +46,6 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-// User.findOrCreate({ githubId: profile.id }, function (err, user) {
-//     return done(err, user);
-//   });
 
 router.get('/login/federated/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
