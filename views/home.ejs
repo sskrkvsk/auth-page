@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Success Page</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
+<%- include('./templates/header.ejs') %>
   <body>
-    <H1>You have successfully loged in!</H1>
-    <form action="/logout" method="post">
-      <button class="logout" type="submit">Sign out</button>
-    </form>
+    <main class="success">
+      <div class="container">
+        <% if (userName) { %> <h1><%= userName %> you have successfully logged in!</h1> <% } else { %>
+        <H1>You have successfully logged in!</H1>
+        <% } %>
+        <form action="/logout" method="post">
+          <button class="logout" type="submit">Sign out</button>
+        </form>
+      </div>
+    </main>
+    <div class="sun"></div>
+    <img src="/images/cloud.png" alt="" class="cloud cloud-1">
+    <img src="/images/cloud.png" alt="" class="cloud cloud-2">
+    <img src="/images/cloud.png" alt="" class="cloud cloud-3">
   </body>
 </html>

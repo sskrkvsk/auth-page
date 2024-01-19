@@ -2,15 +2,6 @@
   box-sizing: border-box;
 }
 
-:root {
-  --primary-color: #007bff;
-  --secondary-color: #ff6600;
-  --border-radius: 10px;
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-
 body {
   padding: 0px;
   font: 14px "Roboto", sans-serif;
@@ -43,7 +34,7 @@ a:focus {
 }
 
 /* FORM */
-main {
+.main {
   z-index: 200;
   background: linear-gradient(90deg, rgba(85, 85, 85, 0.6), rgba(55, 55, 55, 0.6), rgba(34, 34, 34, 0.6));
   border-radius: 30px;
@@ -158,6 +149,99 @@ input {
 
 .icon {
   width: 35px;
+}
+
+/* Main */
+.success {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #7eaff7 60%, #65a6e6 80%, #3a78c7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  margin-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100px;
+  height: 50px;
+  background-color:  rgba(24, 24, 24, 0.2);
+  color: #e2e2e2;
+  font-size: 15px;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: solid 0.5px rgb(151, 151, 151);
+  transition: ease 1s;
+}
+
+.logout:hover {
+  text-decoration: none;
+  border: solid 1px #fff;
+  color: #fff;
+}
+
+.logout:active {
+  background-color:  rgba(24, 24, 24, 0.4);
+}
+
+.sun {
+  position: absolute;
+  right: 10%;
+  top:10%;
+  background-color: #f7ffdc;
+  background-position: center;
+  background-size: 176px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px 2px white;
+}
+
+@keyframes fly {
+  to {
+    transform: translateX(90vw)
+  }
+}
+
+@keyframes fly-2 {
+  to {
+    transform: translateX(calc(550px + 95vh));
+  }
+}
+@keyframes fly-3 {
+  to {
+    transform: translateX(30vw)
+  }
+}
+
+.cloud {
+  position: absolute;
+  width: 150px;  
+}
+
+.cloud-1 {
+  top: 100px;
+  left: -150px;
+  animation: fly 35s linear forwards;
+}
+.cloud-2 {
+  top: 200px;
+  left: -550px;
+  animation: fly-2 30s linear forwards;
+}
+.cloud-3 {
+  top: 50%;
+  left: -280px;
+  animation: fly-3 40s linear forwards;
 }
 
  /* ANIMATIONS */
