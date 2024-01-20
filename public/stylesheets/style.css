@@ -167,9 +167,13 @@ input {
   align-items: center;
 }
 
-.succes-h1 {
-  text-align: center;
+.succes-h2 {
+  font-weight: 300;
+  margin-top: 40px;
+  color: #f0f0f0;
+  font-size: 2rem;
   padding: 10px;
+  text-align: center;
 }
 
 .logout {
