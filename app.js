@@ -1,7 +1,7 @@
 console.log('Starting the application...');
 require('dotenv').config();
 
-
+require('https').globalAgent.options.rejectUnauthorized = false;
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
