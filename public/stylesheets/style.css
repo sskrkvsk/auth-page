@@ -198,8 +198,6 @@ input {
   right: 10%;
   top:10%;
   background-color: #f7ffdc;
-  background-position: center;
-  background-size: 176px;
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -208,13 +206,13 @@ input {
 
 @keyframes fly {
   to {
-    transform: translateX(90vw)
+    transform: translateX(80vw)
   }
 }
 
 @keyframes fly-2 {
   to {
-    transform: translateX(calc(550px + 95vh));
+    transform: translateX(calc(350px + 90vh));
   }
 }
 @keyframes fly-3 {
@@ -230,12 +228,12 @@ input {
 
 .cloud-1 {
   top: 100px;
-  left: -150px;
+  left: 10px;
   animation: fly 35s linear forwards;
 }
 .cloud-2 {
   top: 200px;
-  left: -550px;
+  left: -300px;
   animation: fly-2 30s linear forwards;
 }
 .cloud-3 {
@@ -356,4 +354,57 @@ input {
 
 
 
-@media (max-width: 768px) {}
+@media (max-width: 1140px) {
+  @keyframes fly-2 {
+    to {
+      transform: translateX(50vh);
+    }
+  }
+  @keyframes fly-3 {
+    to {
+      transform: translateX(30vw)
+    }
+  }
+  .cloud-2 {
+    left: -100;
+  }
+}
+
+@media (max-width: 830px) {
+  .sun {
+    width: 80px;
+    height: 80px;
+  }
+  .succes-h1 {
+    text-align: center;
+    padding: 10px;
+  }
+  @keyframes fly {
+    to {
+      transform: translateX(70vw)
+    }
+  }
+  @keyframes fly-3 {
+    to {
+      transform: translateX(60vw)
+    }
+  }
+  .cloud {
+    width: 100px;  
+  }
+  
+  .cloud-1 {
+    top: 100px;
+    left: 10px;
+    animation: fly 35s linear forwards;
+  }
+  .cloud-2 {
+    top: 140px;
+    left: -50
+  }
+  .cloud-3 {
+    top: auto;
+    bottom: 150px;
+    left: -70px;
+  }
+}

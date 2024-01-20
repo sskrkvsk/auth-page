@@ -3,7 +3,7 @@
     <main class="success">
       <div class="container">
         <% if (userName) { %> <h1><%= userName %> you have successfully logged in!</h1> <% } else { %>
-        <H1>You have successfully logged in!</H1>
+        <H1 class="succes-h1">You have successfully logged in!</H1>
         <% } %>
         <form action="/logout" method="post">
           <button class="logout" type="submit">Sign out</button>
