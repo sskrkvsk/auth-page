@@ -6,8 +6,8 @@ body {
   padding: 0px;
   font: 14px "Roboto", sans-serif;
   color: white;
-  height: 100vh; /* This ensures the gradient covers the entire viewport height */
-  margin: 0;     /* Remove default body margin for a full-page gradient */
+  height: 100vh;
+  margin: 0;     
   background: linear-gradient(180deg, #101011 60%, #111236 80%, #262777);
   display: flex;
   align-items: center;
@@ -26,7 +26,6 @@ h1, h2, h3, p, ul, ol {
     padding: 0;
     list-style: none;
 }
-
 
 a:hover,
 a:focus {
@@ -53,12 +52,10 @@ h1 {
   font-weight: 300;
   margin-top: 40px;
   color: #f0f0f0;
-  /* margin-bottom: 5px; */
 }
 
 
 .input-container {
-  /* height: 40%; */
   display: flex;
   flex-direction: column;
   gap: 10px;

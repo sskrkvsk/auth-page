@@ -5,10 +5,7 @@ var crypto = require('crypto');
 mkdirp.sync('var/db');
 
 var db = new sqlite3.Database('var/db/info.db');
-// serialize execute a series of operations within a transaction. All at once or none at all
 db.serialize(function() {
-    // "\" - line continuation 
-    // BLOB - Binary Large Object
     db.run("CREATE TABLE IF NOT EXISTS users ( \
       id INTEGER PRIMARY KEY, \
       username TEXT UNIQUE, \
@@ -27,7 +24,6 @@ db.serialize(function() {
       UNIQUE (provider, subject) \
     )");
     
-    // create an initial user (username: theuser, password: initialpassword)
     var salt = crypto.randomBytes(16);
     db.run('INSERT OR IGNORE INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
       'theuser',
