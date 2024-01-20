@@ -167,6 +167,11 @@ input {
   align-items: center;
 }
 
+.succes-h1 {
+  text-align: center;
+  padding: 10px;
+}
+
 .logout {
   display: flex;
   align-items: center;
@@ -374,10 +379,6 @@ input {
   .sun {
     width: 80px;
     height: 80px;
-  }
-  .succes-h1 {
-    text-align: center;
-    padding: 10px;
   }
   @keyframes fly {
     to {
