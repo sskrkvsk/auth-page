@@ -2,7 +2,7 @@
   <body>
     <main class="success">
       <div class="container">
-        <% if (userName) { %> <h1><%= userName %> you have successfully logged in!</h1> <% } else { %>
+        <% if (userName) { %> <h2 class="succes-h2"><%= userName %> you have successfully logged in!</h2> <% } else { %>
         <H2 class="succes-h2">You have successfully logged in!</H2>
         <% } %>
         <form action="/logout" method="post">
