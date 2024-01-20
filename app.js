@@ -1,7 +1,5 @@
-console.log('Starting the application...');
 require('dotenv').config();
 
-require('https').globalAgent.options.rejectUnauthorized = false;
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -16,6 +14,7 @@ const localRouter = require('./routes/local');
 const googleRouter = require('./routes/google');
 const facebookRouter = require('./routes/facebook');
 const githubRouter = require('./routes/github');
+const errorRouter = require('./routes/error');
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +40,8 @@ app.use('/', localRouter);
 app.use('/', googleRouter);
 app.use('/', facebookRouter);
 app.use('/', githubRouter);
+app.use('/:xyz', githubRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
